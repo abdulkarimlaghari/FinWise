@@ -3,8 +3,10 @@ D:\Abdul Karim 2025\Projects 2025\FinWise\FinWise\src\main\java\com\finwise\FinW
 D:\Abdul Karim 2025\Projects 2025\FinWise\FinWise\src\main\java\com\finwise\FinWise\controller\ExpenseController.java
 D:\Abdul Karim 2025\Projects 2025\FinWise\FinWise\src\main\java\com\finwise\FinWise\dto\JwtResponse.java
 D:\Abdul Karim 2025\Projects 2025\FinWise\FinWise\src\main\java\com\finwise\FinWise\dto\LoginRequest.java
+D:\Abdul Karim 2025\Projects 2025\FinWise\FinWise\src\main\java\com\finwise\FinWise\dto\UserResponseDTO.java
 D:\Abdul Karim 2025\Projects 2025\FinWise\FinWise\src\main\java\com\finwise\FinWise\FinWiseApplication.java
 D:\Abdul Karim 2025\Projects 2025\FinWise\FinWise\src\main\java\com\finwise\FinWise\model\Expense.java
+D:\Abdul Karim 2025\Projects 2025\FinWise\FinWise\src\main\java\com\finwise\FinWise\model\Role.java
 D:\Abdul Karim 2025\Projects 2025\FinWise\FinWise\src\main\java\com\finwise\FinWise\model\User.java
 D:\Abdul Karim 2025\Projects 2025\FinWise\FinWise\src\main\java\com\finwise\FinWise\repository\ExpenseRepository.java
 D:\Abdul Karim 2025\Projects 2025\FinWise\FinWise\src\main\java\com\finwise\FinWise\repository\UserRepository.java

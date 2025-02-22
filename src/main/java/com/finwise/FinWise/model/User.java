@@ -1,9 +1,10 @@
 package com.finwise.FinWise.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -21,19 +22,27 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Setter
     @Column(unique = true, nullable = false)
     private String username;
 
 //    @JsonIgnore
 //    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @Setter
     @Column(nullable = false)
+    @JsonIgnore
     private String password;
 
+    @Setter
+    @Getter
     @Column(unique = true, nullable = false) // Email cannot be null
     private String email;
 
+    @Setter
+    @Getter
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private String role;
+    private Role role;
 
     // UserDetails methods
     @Override
@@ -46,39 +55,14 @@ public class User implements UserDetails {
     private List<Expense> expenses = new ArrayList<>();
 
 
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     @Override
     public String getUsername() {
         return username; // Return the username field
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     @Override
     public String getPassword() {
         return password; // Return the password field
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     @Override

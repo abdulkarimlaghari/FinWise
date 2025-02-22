@@ -1,6 +1,5 @@
 package com.finwise.FinWise.service;
 
-import com.finwise.FinWise.model.User;
 import com.finwise.FinWise.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,9 +15,8 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
-        return user; // User implements UserDetails, so it can be returned directly
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username)); // User implements UserDetails, so it can be returned directly
     }
 }
 

@@ -2,23 +2,23 @@ package com.finwise.FinWise.controller;
 
 import com.finwise.FinWise.dto.JwtResponse;
 import com.finwise.FinWise.dto.LoginRequest;
+import com.finwise.FinWise.dto.UserResponseDTO;
+import com.finwise.FinWise.model.Role;
 import com.finwise.FinWise.model.User;
 import com.finwise.FinWise.repository.UserRepository;
 import com.finwise.FinWise.service.CustomUserDetailsService;
 import com.finwise.FinWise.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/auth")
@@ -40,17 +40,25 @@ public class AuthController {
     private PasswordEncoder passwordEncoder;
 
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody User user) {
-        if (user.getUsername() == null || user.getPassword() == null || user.getEmail() == null) {
-            return ResponseEntity.badRequest().body("All fields (username, password, email) are required!");
-        }
-
-        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
+    public ResponseEntity<?> registerUser(@RequestBody LoginRequest request) {
+        if (userRepository.findByUsername(request.getUsername()).isPresent()) {
             return ResponseEntity.badRequest().body("Username is already taken!");
         }
 
-        user.setPassword(passwordEncoder.encode(user.getPassword())); // Hash the password
+        if (userRepository.findByEmail(request.getEmail()).isPresent()) {
+            return ResponseEntity.badRequest().body("Email is already in use!");
+        }
+
+        User user = new User();
+        user.setUsername(request.getUsername());
+        user.setEmail(request.getEmail());
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+
+        // Assigning default role if not provided
+        user.setRole(request.getRole() != null ? request.getRole() : Role.USER);
+
         userRepository.save(user);
+
         return ResponseEntity.ok("User registered successfully!");
     }
 
@@ -68,10 +76,11 @@ public class AuthController {
     }
 
 
-    // ✅ New API to Fetch All Users
     @GetMapping("/users")
-//    @PreAuthorize("hasRole('ADMIN')") // Ensure only ADMIN can access this
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public List<UserResponseDTO> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        return users.stream()
+                .map(user -> new UserResponseDTO(user.getId(), user.getUsername(), user.getEmail(), user.getRole()))
+                .collect(Collectors.toList());
     }
 }
