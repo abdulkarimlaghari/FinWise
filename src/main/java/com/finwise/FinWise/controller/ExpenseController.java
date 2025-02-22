@@ -16,10 +16,24 @@ public class ExpenseController {
     @Autowired
     private ExpenseService expenseService;
 
-    @GetMapping
-    public List<Expense> getExpenses(@RequestParam Long userId) {
+    @GetMapping("/all")
+    public List<Expense> getAllExpenses() {
+        return expenseService.getAllExpenses();
+    }
+
+
+    @GetMapping("/user")
+    public List<Expense> getUserExpenses(Principal principal) {
+        String username = principal.getName(); // Get the logged-in user's username
+        return expenseService.getExpensesByUsername(username);
+    }
+
+    @GetMapping("/{userId}")
+    public List<Expense> getExpensesByUserId(@PathVariable Long userId) {
         return expenseService.getExpensesByUserId(userId);
     }
+
+
 
     @PostMapping
     public ResponseEntity<?> addExpense(@RequestBody Expense expense, Principal principal) {

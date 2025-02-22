@@ -17,10 +17,10 @@ public class ExpenseService {
 
     @Autowired
     private UserRepository userRepository;
-
-    public List<Expense> getExpensesByUserId(Long userId) {
-        return expenseRepository.findByUserId(userId);
-    }
+//
+//    public List<Expense> getExpensesByUserId(Long userId) {
+//        return expenseRepository.findByUserId(userId);
+//    }
 
     public Expense addExpense(Expense expense, String username) {
         // Fetch user by username
@@ -32,6 +32,21 @@ public class ExpenseService {
 
         return expenseRepository.save(expense);
     }
+
+    public List<Expense> getExpensesByUsername(String username) {
+        return expenseRepository.findByUser_Username(username);
+    }
+
+    public List<Expense> getAllExpenses() {
+        return expenseRepository.findAll();
+    }
+
+    public List<Expense> getExpensesByUserId(Long userId) {
+        return expenseRepository.findByUser_Id(userId);
+    }
+
+
+
 
     public Expense updateExpense(Long id, Expense updatedExpense) {
         Expense expense = expenseRepository.findById(id)
