@@ -1,0 +1,14 @@
+com\finwise\FinWise\FinWiseApplication.class
+com\finwise\FinWise\util\JwtUtil.class
+com\finwise\FinWise\service\ExpenseService.class
+com\finwise\FinWise\controller\ExpenseController.class
+com\finwise\FinWise\repository\UserRepository.class
+com\finwise\FinWise\model\User.class
+com\finwise\FinWise\model\Expense.class
+com\finwise\FinWise\config\SecurityConfig.class
+com\finwise\FinWise\dto\LoginRequest.class
+com\finwise\FinWise\security\JwtAuthenticationFilter.class
+com\finwise\FinWise\service\CustomUserDetailsService.class
+com\finwise\FinWise\controller\AuthController.class
+com\finwise\FinWise\dto\JwtResponse.class
+com\finwise\FinWise\repository\ExpenseRepository.class
