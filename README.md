@@ -1,6 +1,6 @@
 # FinWise - Personal Finance Manager
 
-FinWise is a full-stack personal finance management system built with Spring Boot (backend) and React.js (frontend). It helps users track expenses, set budgets, and get AI-driven financial insights.
+FinWise is a full-stack personal finance management system built with Java, Spring Boot (backend), and React.js (frontend). It helps users track expenses, set budgets, and get AI-driven financial insights.
 
 ## Features
 - User registration and login.
